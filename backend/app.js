@@ -1,11 +1,10 @@
 const express = require('express')
+require('dotenv').config()
 const authRouter = require('./router/auth')
 const getDataRouter =  require('./router/getData')
 
-
 const app = express()
-const port = 3000
-
+const port = process.env.PORT || 3000
 
 // strava authentication
 app.use(authRouter)
