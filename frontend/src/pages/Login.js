@@ -15,5 +15,5 @@ export default function Login() {
   }, [])
 
 
-  return <div>Loading...</div>
+  return <div className='text-white p-5 text-4xl'>Loading...</div>
 }
