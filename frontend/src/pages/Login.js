@@ -9,6 +9,8 @@ export default function Login() {
       const data = response.data
       const { authUrl } = data
       window.location.href = authUrl
+    }).catch((e) => {
+      console.log(e)
     })
   }, [])
 

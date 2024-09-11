@@ -43,7 +43,6 @@ app.get('/get-auth-url', (req, res) => {
 
 app.get('/get-routes', async (req, res) => {
   const { AccessToken, athleteID } = req.session
-
   const { code } = req.query;
 
   try {
