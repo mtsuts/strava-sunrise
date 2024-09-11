@@ -34,6 +34,14 @@ router.get('/get-data', async (req, res) => {
   const { AccessToken, athleteID } = req.session
   const { code } = req.query;
 
+  async function getData(accessToken) {
+    const url = `https://www.strava.com/api/v3/athlete/activities?per_page=30&page=4`;
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return res.json(response.data);
+  }
+
   try {
     if (code && !AccessToken) {
       const tokenResponse = await axios.post('https://www.strava.com/oauth/token', {
@@ -47,26 +55,15 @@ router.get('/get-data', async (req, res) => {
       req.session.AccessToken = access_token
       req.session.athleteID = athlete.id
 
-      const url = `https://www.strava.com/api/v3/athlete/activities?per_page=30&page=4`;
-      const response = await axios.get(url, {
-        headers: { Authorization: `Bearer ${access_token}` },
-      });
-      return res.json(response.data);
+      getData(access_token)
     }
-
     if (AccessToken) {
-      const url = `https://www.strava.com/api/v3/athlete/activities?per_page=30&page=4`;
-      const response = await axios.get(url, {
-        headers: { Authorization: `Bearer ${AccessToken}` },
-      });
-      return res.json(response.data);
-
+      getData(AccessToken)
     }
   } catch (e) {
     res.status(500).send(e)
   }
 })
-
 
 
 module.exports = router
