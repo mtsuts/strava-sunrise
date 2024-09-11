@@ -9,6 +9,7 @@ function App() {
   return (
     <div>
      <NavigationBar/>
+     <GetRoutes/>
      <Outlet></Outlet>
     </div>
   );

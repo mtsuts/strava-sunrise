@@ -29,8 +29,7 @@ export default function GetRoutes() {
   if (data) {
     console.log(data)
   }
-  const firstName = data?.firstname || ''
 
-  return <div className='text-4xl font-bold mt-10 text-gray-500'> Welcome {firstName}!</div>
+  return <div className='text-4xl text-center font-bold mt-10 text-white'> Welcome!</div>
 }
 
