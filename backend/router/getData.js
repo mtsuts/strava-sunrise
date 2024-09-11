@@ -3,6 +3,7 @@ const router = express.Router()
 const axios = require('axios');
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+require('dotenv').config()
 require('../db/mongoose')
 const cors = require('cors')
 
@@ -12,9 +13,8 @@ router.use(cors({
   credentials: true,
 }));
 
-
 router.use(session({
-  secret: 'santaclause',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
