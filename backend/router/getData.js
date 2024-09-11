@@ -8,8 +8,8 @@ require('../db/mongoose')
 const cors = require('cors')
 
 
-const CLIENT_ID = '101939';
-const CLIENT_SECRET = '356fbee0b5dd4bd4fefefbe85d9ea125e832b065';
+const CLIENT_ID = process.env.CLIENT_ID
+const CLIENT_SECRET = process.env.CLIENT_SECRET
 
 router.use(cors({
   origin: 'http://localhost:3001',
@@ -31,8 +31,6 @@ router.use(session({
     maxAge: 1000 * 60 * 60 * 24
   },
 }));
-
-
 
 
 router.get('/get-data', async (req, res) => {
