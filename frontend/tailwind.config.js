@@ -8,6 +8,7 @@ module.exports = {
     colors: {
       lightSpace: '#05377b',
       darkSpace: '#010b19', 
+      mediumSpace: '#042c62',
       white: '#ffffff'
     },
   },
