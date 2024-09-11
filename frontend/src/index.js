@@ -11,6 +11,7 @@ import {
   Link,
 } from "react-router-dom";
 import Login from './pages/Login';
+import UserProfile from './pages/UserProfile';
 
 const router = createBrowserRouter([
   {
@@ -19,13 +20,13 @@ const router = createBrowserRouter([
       <App></App>
     ),
     children: [
-      {
-        path: "about",
-        element: (
-          <div>About me</div>
-        ),
-      },
     ]
+  },
+  {
+    path: "my-profile",
+    element: (
+      <UserProfile></UserProfile>
+    ),
   },
   {
     path: "/login",
