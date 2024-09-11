@@ -36,14 +36,14 @@ router.use(session({
 router.get('/get-data', async (req, res) => {
   const { AccessToken, athleteID } = req.session
   const { code } = req.query;
-  console.log(req.session.AccessToken)
 
   async function getData(accessToken) {
     const url = `https://www.strava.com/api/v3/athlete/activities?per_page=30&page=4`;
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    return res.json(response.data);
+    return res.send(response.data)
+    // return res.json(response.data);
   }
 
   try {
