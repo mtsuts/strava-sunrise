@@ -8,6 +8,9 @@ require('../db/mongoose')
 const cors = require('cors')
 
 
+const CLIENT_ID = '101939';
+const CLIENT_SECRET = '356fbee0b5dd4bd4fefefbe85d9ea125e832b065';
+
 router.use(cors({
   origin: 'http://localhost:3001',
   credentials: true,
@@ -30,9 +33,12 @@ router.use(session({
 }));
 
 
+
+
 router.get('/get-data', async (req, res) => {
   const { AccessToken, athleteID } = req.session
   const { code } = req.query;
+  console.log(req.session.AccessToken)
 
   async function getData(accessToken) {
     const url = `https://www.strava.com/api/v3/athlete/activities?per_page=30&page=4`;
