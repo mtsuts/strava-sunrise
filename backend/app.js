@@ -1,7 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const authRouter = require('./router/auth')
-const getDataRouter =  require('./router/getData')
+const getDataRouter = require('./router/getData')
 
 const app = express()
 const port = process.env.PORT || 3000

@@ -30,6 +30,6 @@ export default function UserProfile() {
   }
   const amountOfRoutes = data?.length || ''
 
-  return  amountOfRoutes ? <div className='text-4xl text-center font-bold mt-10 text-white'> Welcome! You have {amountOfRoutes} Routes </div> : <div></div>
+  return  amountOfRoutes ? <div className='text-4xl text-center font-bold mt-10 text-white'> Welcome! You have {amountOfRoutes} Activities! </div> : <div></div>
 
 }
