@@ -23,9 +23,8 @@ router.use(session({
 }));
 
 
-router.get('/logout', (req,res) => {
-  req.session.AccessToken = ''
-  console.log(req.session.AccessToken)
+router.get('/logout', (req, res) => {
+    console.log(req.session.AccessToken)
 })
 
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../components/AuthContext';
+import Card from '../components/Card';
+import MetricData from '../components/MetricData';
 
 export default function UserProfile() {
   const [data, setData] = useState([])
@@ -29,11 +31,51 @@ export default function UserProfile() {
       })
   }, [login])
 
-  if (data) {
-    console.log(data)
+
+  console.log(data)
+  const [showMetricData, setShowMetricData] = useState(false);
+  const [metricValue, setMetricValue] = useState('')
+
+  const kudos = data.map((activity) => {
+    return activity.kudos_count
+  })
+  const maxKudo = Math.max(...kudos)
+  console.log(maxKudo)
+
+  const metrics = [
+    {
+      label: 'Kudo',
+      value: maxKudo
+    },
+    {
+      label: 'Elevation',
+      value: 'maxElevation'
+    },
+    {
+      label: 'Speed',
+      value: 'maxSpeed'
+    }
+  ]
+
+  const metricsLabels = metrics.map((metric) => metric.label)
+
+  function handleClick(metric) {
+    setShowMetricData(true)
+    const foundMetric = metrics.find((obj) => {
+      return obj.label === metric
+    })
+    setMetricValue(foundMetric.value)
   }
-  const amountOfRoutes = data?.length || ''
 
-  return amountOfRoutes ? <div className='text-4xl text-center font-bold mt-10 text-white'> Welcome! You have {amountOfRoutes} Activities! </div> : <div></div>
-
+  return (
+    <div className='text-center'>
+      <div className='text-4xl font-bold mt-10 text-white'> Welcome! please choose metric </div>
+      <div className='text-white flex flex-row  gap-10 justify-center items-center mt-20'>
+        {metricsLabels.map((metric, index) => (
+          <Card onClick={() => { handleClick(metric) }} key={index} name={metric} />
+        ))}
+      </div>
+      {showMetricData && <MetricData metricValue={metricValue} />}
+    </div >
+  )
 }
