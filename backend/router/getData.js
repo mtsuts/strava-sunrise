@@ -7,7 +7,6 @@ require('dotenv').config()
 require('../db/mongoose')
 const cors = require('cors')
 
-
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 
@@ -42,8 +41,7 @@ router.get('/get-data', async (req, res) => {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    return res.send(response.data)
-    // return res.json(response.data);
+    return res.json(response.data);
   }
 
   try {
@@ -56,15 +54,19 @@ router.get('/get-data', async (req, res) => {
       });
 
       const { access_token, refresh_token, athlete } = tokenResponse.data;
+      console.log(refresh_token)
+
       req.session.AccessToken = access_token
       req.session.athleteID = athlete.id
 
-      getData(access_token)
+        getData(access_token)
+   
     }
     if (AccessToken) {
       getData(AccessToken)
     }
   } catch (e) {
+    console.log(e)
     res.status(500).send(e)
   }
 })

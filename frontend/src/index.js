@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import { createRoot } from "react-dom/client";
 import './index.css';
 import App from './App';
@@ -9,7 +8,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 import UserProfile from './pages/UserProfile';
+import { AuthProvider } from './components/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,18 @@ const router = createBrowserRouter([
       <App></App>
     ),
     children: [
+      {
+        path: "my-profile",
+        element: (
+          <UserProfile></UserProfile>
+        ),
+      },
+      {
+        path: "/logout",
+        element: (
+          <Logout> </Logout>
+        ),
+      },
     ]
   },
   {
@@ -34,10 +47,11 @@ const router = createBrowserRouter([
   },
 ]);
 
-
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
 
