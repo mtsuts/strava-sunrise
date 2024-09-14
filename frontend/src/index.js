@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from "react-dom/client";
-import './index.css';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -10,7 +10,9 @@ import {
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import UserProfile from './pages/UserProfile';
-import { AuthProvider } from './components/AuthContext';
+import { AppProvider } from './components/AppContext';
+
+
 
 const router = createBrowserRouter([
   {
@@ -49,9 +51,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
+    <AppProvider>
       <RouterProvider router={router} />
-    </AuthProvider>
+    </AppProvider>
   </React.StrictMode>
 );
 
