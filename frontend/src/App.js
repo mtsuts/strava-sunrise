@@ -1,17 +1,44 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './App.css';
 import NavigationBar from './components/NavigationBar';
 import { Outlet } from 'react-router-dom';
-import { AuthContext } from './components/AuthContext';
-
-
+import { getActivities } from './api/api'
+import { useSearchParams } from 'react-router-dom';
+import { AppContext } from './components/AppContext';
 
 function App() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { data, setData } = useContext(AppContext)
+  // const [data, setData] = useState([])
+  const [searchParams, setSearchParams] = useSearchParams();
+
+
+  const dataLoaded = useRef(false)
+
+
+  useEffect(() => {
+    if (dataLoaded.current) {
+      return
+    }
+    dataLoaded.current = true
+
+    getActivities()
+      .then((data) => {
+        setSearchParams({})
+        setData(data)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }, [])
+
+  if(data){
+    console.log(data)
+  }
+
+
   return (
     <div>
       <NavigationBar />
-      {!isLoggedIn && <div className='text-white text-center p-10 text-4xl'> Please authorize Strava access</div>}
       <Outlet></Outlet>
     </div>
   );
