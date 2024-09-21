@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import axios from 'axios'
 
 export default function Logout() {
-
+  localStorage.setItem('token', '')
   useEffect(() => {
     axios.get('http://localhost:3000/logout')
       .then((response) => {

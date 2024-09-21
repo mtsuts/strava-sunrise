@@ -7,7 +7,6 @@ export const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([])
 
-
   const login = () => {
     setIsLoggedIn(true)
   };

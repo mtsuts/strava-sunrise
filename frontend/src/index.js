@@ -12,8 +12,6 @@ import Logout from './pages/Logout';
 import UserProfile from './pages/UserProfile';
 import { AppProvider } from './components/AppContext';
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",

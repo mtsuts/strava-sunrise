@@ -6,10 +6,10 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      lightSpace: '#05377b',
-      darkSpace: '#010b19', 
-      mediumSpace: '#042c62',
-      white: '#ffffff'
+      red100: '#ffcdd2', 
+      indigo900: '#1a237e',
+      white: '#ffffff', 
+
     },
   },
   plugins: [],
