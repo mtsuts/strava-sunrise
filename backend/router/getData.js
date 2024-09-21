@@ -14,9 +14,8 @@ router.get('/get-data', stravaAuth, async (req, res) => {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    return res.json(response.data);
+    return res.json({ data: response.data, accessToken });
   } catch (e) {
-    console.log(e)
     res.status(500).send(e.message)
   }
 })

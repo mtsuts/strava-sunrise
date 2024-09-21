@@ -11,7 +11,6 @@ const validateCode = (code) => {
 }
 
 const stravaAuth = async (req, res, next) => {
-  console.log(req.query)
   const { code } = req.query
   try {
     if (validateCode(code)) {
