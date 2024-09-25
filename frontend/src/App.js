@@ -11,7 +11,7 @@ function App() {
   const token = localStorage.getItem('token')
 
   return (
-    <div>
+    <div class='bg-white'>
       <NavigationBar />
       {!token && !isLoading && <p className='text-center text-4xl text-white p-5'> </p>}
       <Outlet></Outlet>

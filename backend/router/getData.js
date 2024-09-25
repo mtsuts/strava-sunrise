@@ -10,7 +10,7 @@ router.get('/get-data', stravaAuth, async (req, res) => {
     if (!accessToken) {
       throw new Error('Access token missing!')
     }
-    const url = `https://www.strava.com/api/v3/athlete/activities?per_page=10&page=1`;
+    const url = `https://www.strava.com/api/v3/athlete/activities?per_page=20&page=1`;
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });

@@ -1,13 +1,15 @@
 import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { blueGrey, deepPurple, red } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
     background: {
-      main: red[500],
-    },
-    primary: {
-      main: red[500]
+      main: {
+        red500: red[500],
+        blueGrey800: blueGrey[800],
+        deepPurple900: deepPurple[900],
+        deepPurple600: deepPurple[600]
+      }
     },
   },
 });

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { AppContext } from '../components/AppContext';
 import { GetActivities } from '../api/api'
 import { useSearchParams } from 'react-router-dom';
+import { fromMetersSecondToKmsHour, fromMetersToKms } from '../utils/metricsUpdates'
 
 
 
@@ -18,7 +19,6 @@ export default function UserProfile() {
       .then((data) => {
         setSearchParams({})
         setData(data)
-        console.log(data)
         localStorage.setItem('token', data.accessToken)
       })
       .catch((e) => {
@@ -26,5 +26,16 @@ export default function UserProfile() {
       })
   }, [])
 
-  return <div className='text-center text-white text-6xl p-5'>My profile</div>
+  if (data) {
+    const mainData = data?.data || []
+    const activities = mainData.filter((activity) => activity.type === 'Ride').map((activity) => {
+      return {
+        ...activity,
+        average_speed: fromMetersSecondToKmsHour(activity.average_speed),
+        distance: fromMetersToKms(activity.distance)
+      }
+    })
+    console.log(activities)
+  }
+  return <div className='text-center text-red100 text-6xl p-5'>Here you will see your data!</div>
 }
