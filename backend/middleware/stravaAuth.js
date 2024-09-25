@@ -22,6 +22,7 @@ const stravaAuth = async (req, res, next) => {
       });
 
       const { access_token, refresh_token, athlete } = tokenResponse.data;
+      console.log(access_token)
 
       req.session.accessToken = access_token
       req.session.athleteID = athlete.id
