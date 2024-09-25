@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import * as d3 from 'd3'
 import { AppContext } from '../components/AppContext';
 import { Box } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
@@ -7,6 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import theme from '../utils/themes';
 import { fromMetersSecondToKmsHour, fromMetersToKms, dateFormatter } from '../utils/metricsUpdates'
 import ActivityLineChart from '../components/vizualizations/ActivityLineChart';
+
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,7 +30,6 @@ export default function UserProfile() {
       })
   }, [])
 
-  if (data) {
     const mainData = data?.data || []
     const activities = mainData.filter((activity) => activity.type === 'Ride').map((activity) => {
       return {
@@ -38,12 +39,12 @@ export default function UserProfile() {
         start_date: dateFormatter(activity.start_date),
       }
     })
-    const sumOfElevations = activities.map((activity) => activity.total_elevation_gain).reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-    console.log(sumOfElevations)
+    const sumOfElevations = activities.map((activity) => activity.average_speed).reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+
     console.log(activities)
-  }
+
   return <ThemeProvider theme={theme}>
-    <Box sx={{ color: theme.palette.background.main.deepPurple600 }} className='text-center text-6xl p-5'>Here you will see your data!</Box>
-    <ActivityLineChart />
+    <Box sx={{ color: theme.palette.background.main.deepPurple600 }} className='text-center text-4xl p-5'>Your average speed across last 10 activities</Box>
+    <ActivityLineChart data={activities} />
   </ThemeProvider>
 }
