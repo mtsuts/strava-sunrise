@@ -8,12 +8,16 @@ import { useSearchParams } from 'react-router-dom';
 import theme from '../utils/themes';
 import { fromMetersSecondToKmsHour, fromMetersToKms, dateFormatter } from '../utils/metricsUpdates'
 import ActivityLineChart from '../components/vizualizations/ActivityLineChart';
+import Card from '../components/Card';
+import Dashboard from '../components/Dashboard';
 
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { data, setData } = useContext(AppContext)
   const dataLoaded = useRef(false)
+
+  // load data
   useEffect(() => {
     if (dataLoaded.current) {
       return
@@ -30,21 +34,31 @@ export default function UserProfile() {
       })
   }, [])
 
-    const mainData = data?.data || []
-    const activities = mainData.filter((activity) => activity.type === 'Ride').map((activity) => {
-      return {
-        ...activity,
-        average_speed: fromMetersSecondToKmsHour(activity.average_speed),
-        distance: fromMetersToKms(activity.distance),
-        start_date: dateFormatter(activity.start_date),
-      }
-    })
-    const sumOfElevations = activities.map((activity) => activity.average_speed).reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+  // data manipulations
+  const mainData = data?.data || []
+  const activities = mainData.filter((activity) => activity.type === 'Ride').map((activity) => {
+    return {
+      ...activity,
+      average_speed: fromMetersSecondToKmsHour(activity.average_speed),
+      distance: fromMetersToKms(activity.distance),
+      start_date: dateFormatter(activity.start_date),
+    }
+  })
+  const sumOfElevations = activities.map((activity) => activity.average_speed).reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+  console.log(activities)
 
-    console.log(activities)
+  // card component parts
+  const [cardData, setCardData] = useState(false)
+  let showCardData = false
+  const handleCardClick = () => {
+    setCardData(!cardData)
+  }
 
   return <ThemeProvider theme={theme}>
-    <Box sx={{ color: theme.palette.background.main.deepPurple600 }} className='text-center text-4xl p-5'>Your average speed across last 10 activities</Box>
-    <ActivityLineChart data={activities} />
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, marginTop: 10 }}>
+      <Card name='Speed line chart' onClick={handleCardClick} />
+    </Box>
+    {cardData && <ActivityLineChart data={activities} />}
+    <Dashboard/>
   </ThemeProvider>
 }
