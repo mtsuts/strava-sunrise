@@ -7,7 +7,7 @@ export default function Card(props) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ '&:hover': { bgcolor: theme.palette.background.main.deepPurple900, cursor: 'pointer' }, fontSize: 20, bgcolor: theme.palette.background.main.deepPurple600, color: '#ffffff', p: 4, borderRadius: 4, maxWidth: 300, textAlign: 'center' }} onClick={props.onClick}> 
-       Explore {props.name}   
+       {props.name}   
         </Box>
     </ThemeProvider>
   )
