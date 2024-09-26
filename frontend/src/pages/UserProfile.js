@@ -34,7 +34,7 @@ export default function UserProfile() {
 
   // data manipulations
   const mainData = data?.data || []
-  const activities = mainData.filter((activity) => activity.type === 'Ride').map((activity) => {
+  const activities = mainData.map((activity) => {
     return {
       ...activity,
       average_speed: fromMetersSecondToKmsHour(activity.average_speed),
@@ -42,19 +42,11 @@ export default function UserProfile() {
       start_date: dateFormatter(activity.start_date),
     }
   })
-  const sumOfElevations = activities.map((activity) => activity.average_speed).reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-  console.log(activities)
-
-  // card component parts
-  const [cardData, setCardData] = useState(false)
-  const handleCardClick = () => {
-    setCardData(!cardData)
-  }
 
   return <ThemeProvider theme={theme}>
     <Box sx={{ textAlign: 'center', fontSize: 20 }}>
-      <Box sx={{ marginTop: 2, color: theme.palette.background.main.deepPurple600, fontSize: 30 }}> My Profile</Box>
-      <Box sx={{ marginTop: 3, display: 'grid', gap: 2, gridTemplateColumns: 'repeat(4, 1fr)', px: 16 }}>
+      <Box sx={{ marginTop: 2, color: theme.palette.background.main.deepPurple600, fontSize: 30, fontWeight: 'bold' }}> My last 20 Activities</Box>
+      <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: 'repeat(4, 1fr)', px: 16, py: 6 }}>
         {activities.map((activity, index) => {
           return (
             <Card key={index} name={activity.name} />
@@ -62,6 +54,5 @@ export default function UserProfile() {
         })}
       </Box>
     </Box>
-    {/* {cardData && <ActivityLineChart data={activities} />} */}
   </ThemeProvider>
 }
