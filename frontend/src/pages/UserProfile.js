@@ -9,8 +9,6 @@ import theme from '../utils/themes';
 import { fromMetersSecondToKmsHour, fromMetersToKms, dateFormatter } from '../utils/metricsUpdates'
 import ActivityLineChart from '../components/vizualizations/ActivityLineChart';
 import Card from '../components/Card';
-import Dashboard from '../components/Dashboard';
-
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -49,19 +47,21 @@ export default function UserProfile() {
 
   // card component parts
   const [cardData, setCardData] = useState(false)
-  let showCardData = false
   const handleCardClick = () => {
     setCardData(!cardData)
   }
 
   return <ThemeProvider theme={theme}>
     <Box sx={{ textAlign: 'center', fontSize: 20 }}>
-      <Box sx={{ marginTop: 2, color: theme.palette.background.main.deepPurple600 }}> My profile</Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 3 }}>
-        <Card name='Speed line chart' onClick={handleCardClick} />
+      <Box sx={{ marginTop: 2, color: theme.palette.background.main.deepPurple600, fontSize: 30 }}> My Profile</Box>
+      <Box sx={{ marginTop: 3, display: 'grid', gap: 2, gridTemplateColumns: 'repeat(4, 1fr)', px: 16 }}>
+        {activities.map((activity, index) => {
+          return (
+            <Card key={index} name={activity.name} />
+          )
+        })}
       </Box>
     </Box>
-    {cardData && <ActivityLineChart data={activities} />}
-    <Dashboard />
+    {/* {cardData && <ActivityLineChart data={activities} />} */}
   </ThemeProvider>
 }
