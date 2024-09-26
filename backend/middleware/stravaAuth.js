@@ -10,6 +10,15 @@ const validateCode = (code) => {
   return true
 }
 
+const refreshToken = async (refreshtoken) => {
+  const tokenResponse = await axios.post('https://www.strava.com/oauth/token', {
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    grant_type: 'refresh_token',
+    refresh_token: refreshtoken
+  })
+}
+
 const stravaAuth = async (req, res, next) => {
   const { code } = req.query
   try {
@@ -22,7 +31,6 @@ const stravaAuth = async (req, res, next) => {
       });
 
       const { access_token, refresh_token, athlete } = tokenResponse.data;
-      console.log(access_token)
 
       req.session.accessToken = access_token
       req.session.athleteID = athlete.id
