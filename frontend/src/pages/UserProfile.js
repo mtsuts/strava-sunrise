@@ -55,10 +55,13 @@ export default function UserProfile() {
   }
 
   return <ThemeProvider theme={theme}>
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, marginTop: 10 }}>
-      <Card name='Speed line chart' onClick={handleCardClick} />
+    <Box sx={{ textAlign: 'center', fontSize: 20 }}>
+      <Box sx={{ marginTop: 2, color: theme.palette.background.main.deepPurple600 }}> My profile</Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 3 }}>
+        <Card name='Speed line chart' onClick={handleCardClick} />
+      </Box>
     </Box>
     {cardData && <ActivityLineChart data={activities} />}
-    <Dashboard/>
+    <Dashboard />
   </ThemeProvider>
 }
