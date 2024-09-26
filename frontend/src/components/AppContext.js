@@ -6,6 +6,7 @@ export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([])
+  const [open, setOpen] = useState(false)
 
   const login = () => {
     setIsLoggedIn(true)
@@ -15,8 +16,9 @@ export const AppProvider = ({ children }) => {
     setIsLoggedIn(false);
   };
 
+
   return (
-    <AppContext.Provider value={{ isLoggedIn, isLoading, data, login, logout, setIsLoading, setData }}>
+    <AppContext.Provider value={{ isLoggedIn, isLoading, data, login, logout, setIsLoading, setData, setOpen, open }}>
       {children}
     </AppContext.Provider>
   );
