@@ -4,7 +4,6 @@ import NavigationBar from './components/NavigationBar';
 import { Outlet } from 'react-router-dom';
 import { AppContext } from './components/AppContext';
 
-
 function App() {
   const { isLoggedIn, isLoading, data } = useContext(AppContext)
   const token = localStorage.getItem('token')

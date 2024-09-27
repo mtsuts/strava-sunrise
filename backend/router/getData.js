@@ -18,6 +18,12 @@ const saveDataToDb = async (stravaData) => {
   }
 }
 
+const fetchData = async (stravaData) => {
+  const { data, error } = await supabase
+    .from('users')
+    .select()
+    console.log(data)
+}
 
 router.get('/get-data', stravaAuth, async (req, res) => {
   const { accessToken, athleteID } = req.session
@@ -36,7 +42,7 @@ router.get('/get-data', stravaAuth, async (req, res) => {
       }
     })
     const stravaUserId = response.data[0].athlete.id
-
+    fetchData()
     console.log(stravaUserId)
     saveDataToDb([{ athleteID: stravaUserId }])
 

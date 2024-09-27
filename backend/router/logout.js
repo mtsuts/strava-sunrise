@@ -29,14 +29,6 @@ const dbName = 'session-store';
 
 router.get('/logout', async (req, res) => {
   // console.log(req.session.accessToken)
-  // try {
-  //   await client.connect();
-  //   const db = client.db(dbName);
-  //   const sessionsCollection = db.collection('sessions');
-  //   await sessionsCollection.deleteMany({});
-  // } catch (e) {
-  //   res.status(500).send('Error while logging out!');
-  // }
 })
 
 
