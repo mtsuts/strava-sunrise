@@ -3,7 +3,9 @@ const router = express.Router()
 const axios = require('axios')
 const stravaAuth = require('../middleware/stravaAuth')
 const { saveActivities, fetchActivitiesById } = require('../db/supabase')
+const polyline = require('@mapbox/polyline')
 require('dotenv').config()
+
 
 router.get('/get-data', stravaAuth, async (req, res) => {
   const { accessToken, athleteID } = req.session
@@ -44,8 +46,14 @@ router.get('/get-data', stravaAuth, async (req, res) => {
       }
     }
 
+    const updatedData = response.data.map((activity) => {
+     return {
+      ...activity, 
+      map: polyline.decode(activity.map.summary_polyline)
+     }
+    })
 
-    return res.json({ data: response.data, accessToken });
+    return res.json({ data: updatedData, accessToken });
 
   } catch (e) {
     res.status(500).send(e.message)
