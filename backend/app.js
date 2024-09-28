@@ -5,10 +5,9 @@ const cors = require('cors')
 const authRouter = require('./router/auth')
 const getDataRouter = require('./router/getData')
 const logoutRouter = require('./router/logout')
+const fetchActivitiesRouter = require('./router/fetchActivities')
 require('dotenv').config()
 require('./db/mongoose')
-
-
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -43,8 +42,13 @@ app.use(authRouter)
 // getting data from strava after authentication
 app.use(getDataRouter)
 
+// fetch activities from supabase database
+app.use(fetchActivitiesRouter)
+
 // logout from strava
 app.use(logoutRouter)
+
+
 
 app.listen(port, () => {
   console.log(`server is up on port ${port}`)
