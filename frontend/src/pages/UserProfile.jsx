@@ -43,6 +43,7 @@ export default function UserProfile() {
     }
   })
 
+
   return <ThemeProvider theme={theme}>
     <Box sx={{ textAlign: 'center', fontSize: 20 }}>
       <Box sx={{ marginTop: 2, color: theme.palette.background.main.deepPurple600, fontSize: 30, fontWeight: 'bold' }}> My last 20 Activities</Box>

@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-[100vh]">
       <NavigationBar />
-      <Box
+      {/* <Box
         sx={{
           p: 3,
           display: "flex",
@@ -23,7 +23,7 @@ function App() {
         }}
       >
         <Card name="Welcome to Sunrise, find out the best routes and experiences from strava friends across the globe!"></Card>
-      </Box>
+      </Box> */}
       <div className="flex-1">
         <Outlet />
       </div>

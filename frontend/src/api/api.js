@@ -11,6 +11,7 @@ export  const GetActivities = async () => {
     const response = await axios.get(url, {
       withCredentials: true,
     })
+    console.log(response.data)
     return response.data
   } catch (e) {
     console.log(e.message)
