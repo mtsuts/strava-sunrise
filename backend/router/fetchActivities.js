@@ -10,9 +10,11 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 
 router.get('/fetch-activities', stravaAuth, async (req, res) => {
+  const userID = req.session.athleteID
   const { data, error } = await supabase
     .from('activities')
     .select()
+    .eq('athleteID', userID)
     res.send(data)
 })
 

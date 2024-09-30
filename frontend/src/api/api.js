@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export  const GetActivities = async () => {
+export const GetActivities = async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
   let url = `http://localhost:3000/get-data`
@@ -11,8 +11,9 @@ export  const GetActivities = async () => {
     const response = await axios.get(url, {
       withCredentials: true,
     })
-    console.log(response.data)
+    localStorage.setItem('token', response.data.accessToken)
     return response.data
+
   } catch (e) {
     console.log(e.message)
   }
