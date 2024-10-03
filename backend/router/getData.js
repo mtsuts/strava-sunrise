@@ -4,6 +4,7 @@ const axios = require('axios')
 const stravaAuth = require('../middleware/stravaAuth')
 const { saveActivities, fetchActivitiesById } = require('../db/supabase')
 const polyline = require('@mapbox/polyline')
+const { fromMetersSecondToKmsHour, fromMetersToKms, dateFormatter, fromSecondsToMins } = require('../utils/metricsUpdates')
 require('dotenv').config()
 
 router.get('/get-data', stravaAuth, async (req, res) => {
@@ -25,7 +26,18 @@ router.get('/get-data', stravaAuth, async (req, res) => {
         type: d.type,
         athleteID: d.athlete.id,
         activityID: d.id,
-        polyline: polyline.decode(d.map.summary_polyline)
+        averageSpeed: fromMetersSecondToKmsHour(d.average_speed),
+        distance: fromMetersToKms(d.distance),
+        startDate: dateFormatter(d.start_date),
+        polyline: polyline.decode(d.map.summary_polyline),
+        startCoords: d.start_latlng,
+        endCoords: d.end_latlng,
+        elevatationGain: Math.floor(d.total_elevation_gain),
+        sportType: d.sport_type,
+        country: d.location_country,
+        movingTime: fromSecondsToMins(d.moving_time),
+        elevationHigh: Math.floor(d.elev_high),
+        elevationLow: Math.floor(d.elev_low)
       }
     })
 
@@ -46,7 +58,7 @@ router.get('/get-data', stravaAuth, async (req, res) => {
     const updatedData = response.data.map((activity) => {
       return {
         ...activity,
-        map: polyline.decode(activity.map.summary_polyline)
+        map: polyline.decode(activity.map.summary_polyline),
       }
     })
 

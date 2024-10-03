@@ -38,15 +38,17 @@ export default function UserProfile() {
 
   // data manipulations
   const mainData = data?.data || [];
-  const activities = mainData.map((activity) => {
-    return {
-      ...activity,
-      average_speed: fromMetersSecondToKmsHour(activity.average_speed),
-      distance: fromMetersToKms(activity.distance),
-      start_date: dateFormatter(activity.start_date),
-    };
-  });
-  // const activities = data.filter((d, i) => i <= 11);
+  // const activities = mainData.map((activity) => {
+  //   return {
+  //     ...activity,
+  //     average_speed: fromMetersSecondToKmsHour(activity.average_speed),
+  //     distance: fromMetersToKms(activity.distance),
+  //     start_date: dateFormatter(activity.start_date),
+  //   };
+  // });
+  const activities = data
+
+  console.log(activities);
 
   return (
     <ThemeProvider theme={theme}>
@@ -61,7 +63,7 @@ export default function UserProfile() {
         >
           {" "}
           {token && "My last 12 Activities"}
-          {!token && 'Please authenticate'}
+          {!token && "Please authenticate"}
         </Box>
         <Box
           sx={{
