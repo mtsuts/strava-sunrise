@@ -15,38 +15,40 @@ import Card from "../components/Card";
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, setData } = useContext(AppContext);
+  const { data, setData, isLoading, setIsLoading } = useContext(AppContext);
   const dataLoaded = useRef(false);
 
+  const token = localStorage.getItem("token");
   // load data
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (dataLoaded.current) {
       return;
     }
     dataLoaded.current = true;
-      GetActivities()
-        .then((data) => {
-          setSearchParams({});
-          setData(data);
-          localStorage.setItem('token', data.accessToken)
-        })
-        .catch((e) => {
-          console.log(e.message);
-        });
+    GetActivities()
+      .then((data) => {
+        setSearchParams({});
+        setData(data);
+        localStorage.setItem("token", data.accessToken);
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
   }, []);
 
   // data manipulations
   const mainData = data?.data || [];
-  const activities = mainData.map((activity) => {
-    return {
-      ...activity,
-      average_speed: fromMetersSecondToKmsHour(activity.average_speed),
-      distance: fromMetersToKms(activity.distance),
-      start_date: dateFormatter(activity.start_date),
-    };
-  });
-  // const activities = data.filter((d, i) => i <= 11);
+  // const activities = mainData.map((activity) => {
+  //   return {
+  //     ...activity,
+  //     average_speed: fromMetersSecondToKmsHour(activity.average_speed),
+  //     distance: fromMetersToKms(activity.distance),
+  //     start_date: dateFormatter(activity.start_date),
+  //   };
+  // });
+  const activities = data
+
+  console.log(activities);
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,7 +62,8 @@ export default function UserProfile() {
           }}
         >
           {" "}
-          My last 12 Activities
+          {token && "My last 12 Activities"}
+          {!token && "Please authenticate"}
         </Box>
         <Box
           sx={{

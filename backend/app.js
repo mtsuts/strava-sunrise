@@ -4,8 +4,8 @@ const MongoStore = require('connect-mongo')
 const cors = require('cors')
 const authRouter = require('./router/auth')
 const getDataRouter = require('./router/getData')
-const logoutRouter = require('./router/logout')
 const fetchActivitiesRouter = require('./router/fetchActivities')
+const logoutRouter = require('./router/logout')
 require('dotenv').config()
 require('./db/mongoose')
 
@@ -18,15 +18,16 @@ app.use(cors({
   credentials: true,
 }));
 
+const store = MongoStore.create({
+  mongoUrl: 'mongodb://127.0.0.1:27017/session-store',
+  collectionName: 'sessions',
+})
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/session-store',
-    collectionName: 'sessions',
-  }),
+  saveUninitialized: true,
+  store: store,
   cookie: {
     secure: false,
     httpOnly: true,

@@ -1,36 +1,26 @@
 const express = require('express')
 const router = express.Router()
-const cors = require('cors')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
-const { MongoClient } = require('mongodb');
-
+const axios = require('axios')
+const stravaAuth = require('../middleware/stravaAuth')
 require('dotenv').config()
-require('../db/mongoose')
 
-router.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/session-store',
-    collectionName: 'sessions',
-  }),
-  cookie: {
-    secure: false,
-    httpOnly: true,
-    sameSite: 'Lax',
-    maxAge: 1000 * 60 * 60 * 24
-  },
-}));
 
-const client = new MongoClient('mongodb://127.0.0.1:27017');
-const dbName = 'session-store';
-
-router.get('/logout', async (req, res) => {
-  // console.log(req.session.accessToken)
+router.get('/logout', stravaAuth, async (req, res) => {
+  const { accessToken, athleteID } = req.session
+  console.log(req.session)
+  try {
+    // Deauthorize from Strava
+    await axios.post('https://www.strava.com/oauth/deauthorize', null, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+    // Clear local session/token (example)
+    console.log('User logged out and token revoked successfully');
+    // You can clear tokens in your database, session, or cookies here
+  } catch (error) {
+    console.error('Error during logout and deauthorization:', error.response ? error.response.data : error.message);
+  }
 })
-
-
 
 module.exports = router
