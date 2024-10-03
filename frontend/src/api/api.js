@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+axios.defaults.withCredentials = true;
+
 export const GetActivities = async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
@@ -13,7 +15,6 @@ export const GetActivities = async () => {
     })
     localStorage.setItem('token', response.data.accessToken)
     return response.data
-
   } catch (e) {
     console.log(e.message)
   }

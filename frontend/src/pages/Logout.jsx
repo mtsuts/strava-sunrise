@@ -1,15 +1,24 @@
-import React, { useEffect, useContext } from 'react'
-import axios from 'axios'
+import React, { useEffect, useContext } from "react";
+import axios from "axios";
+import { AppContext } from "../components/AppContext";
 
 export default function Logout() {
-  localStorage.setItem('token', '')
+  const {setIsLoading} = useContext(AppContext)
+
   useEffect(() => {
-    axios.get('http://localhost:3000/logout')
+    localStorage.setItem("token", "");
+    axios
+      .get("http://localhost:3000/logout", { withCredentials: true })
       .then((response) => {
-      }).catch((e) => {
-        console.log(e)
+        window.location.href = "http://localhost:3001";
       })
-  }, [])
-  window.location.href = 'http://localhost:3001'
-  return <div className='text-white p-5 text-center text-4xl'>You are logged out</div>
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+  return (
+    <div className="text-white p-5 text-center text-4xl">
+      You are logged out
+    </div>
+  );
 }

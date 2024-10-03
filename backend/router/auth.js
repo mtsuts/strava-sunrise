@@ -1,15 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const cors = require('cors')
 
 
 const CLIENT_ID = process.env.CLIENT_ID
 const REDIRECT_URI = 'http://localhost:3001/my-profile';
-
-router.use(cors({
-  origin: 'http://localhost:3001',
-  credentials: true,
-}));
 
 
 router.get('/get-auth-url', (req, res) => {

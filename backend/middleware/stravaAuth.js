@@ -21,11 +21,10 @@ const stravaAuth = async (req, res, next) => {
       });
 
       const { access_token, refresh_token, athlete } = tokenResponse.data;
-
       req.session.accessToken = access_token
       req.session.athleteID = athlete.id
       req.session.refreshToken = refresh_token
-    }
+    } 
     next()
   } catch (e) {
     res.status(500).send(e.message)

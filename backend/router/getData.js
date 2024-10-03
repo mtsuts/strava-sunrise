@@ -8,7 +8,6 @@ require('dotenv').config()
 
 router.get('/get-data', stravaAuth, async (req, res) => {
   const { accessToken, athleteID } = req.session
-
   try {
     if (!accessToken) {
       throw new Error('Access token missing!')
@@ -29,7 +28,7 @@ router.get('/get-data', stravaAuth, async (req, res) => {
         polyline: polyline.decode(d.map.summary_polyline)
       }
     })
-    
+
     const userDBData = await fetchActivitiesById(userId);
 
     if (userDBData.length === 0) {
