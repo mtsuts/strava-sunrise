@@ -4,7 +4,6 @@ const MongoStore = require('connect-mongo')
 const cors = require('cors')
 const authRouter = require('./router/auth')
 const getDataRouter = require('./router/getData')
-const fetchActivitiesRouter = require('./router/fetchActivities')
 const logoutRouter = require('./router/logout')
 require('dotenv').config()
 require('./db/mongoose')
@@ -40,11 +39,8 @@ app.use(session({
 // strava authentication
 app.use(authRouter)
 
-// getting data from strava after authentication
+// save data from strava into the database and get from the database
 app.use(getDataRouter)
-
-// fetch activities from supabase database
-app.use(fetchActivitiesRouter)
 
 // logout from strava
 app.use(logoutRouter)

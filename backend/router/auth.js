@@ -12,5 +12,4 @@ router.get('/get-auth-url', (req, res) => {
 });
 
 
-
 module.exports = router
