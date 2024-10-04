@@ -1,7 +1,10 @@
 const axios = require('axios')
 const { saveActivities, fetchActivitiesById } = require('../db/supabase')
 const { fromMetersSecondToKmsHour, fromMetersToKms, dateFormatter, fromSecondsToMins } = require('../utils/metricsUpdates')
+const geocode = require('../utils/geocoding')
 const polyline = require('@mapbox/polyline')
+
+
 
 const fetchData = async (req, res, next) => {
   try {
@@ -12,13 +15,14 @@ const fetchData = async (req, res, next) => {
     }
     const url = `https://www.strava.com/api/v3/athlete/activities?per_page=10&page=1`;
 
+
     if (code) {
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
-      
+
       const userId = response.data[0].athlete.id
-      const userData = response.data.map((d) => {
+      const userData = await Promise.all(response.data.map(async (d) => {
         return {
           name: d.name,
           type: d.type,
@@ -35,9 +39,10 @@ const fetchData = async (req, res, next) => {
           country: d.location_country,
           movingTime: fromSecondsToMins(d.moving_time),
           elevationHigh: Math.floor(d.elev_high),
-          elevationLow: Math.floor(d.elev_low)
+          elevationLow: Math.floor(d.elev_low),
+          city: await geocode(d.start_latlng[0], d.start_latlng[1])
         }
-      })
+      }))
       const userDBData = await fetchActivitiesById(userId);
 
       if (userDBData.length === 0) {

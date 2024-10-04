@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import UserProfile from './pages/UserProfile';
 import { AppProvider } from './components/AppContext';
+import Test from './pages/Test';
 
 const router = createBrowserRouter([
   {
@@ -26,18 +27,18 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "test",
+        element: (
+          <Test></Test>
+        ),
+      },
+      {
         path: "/logout",
         element: (
           <Logout> </Logout>
         ),
       },
     ]
-  },
-  {
-    path: "my-profile",
-    element: (
-      <UserProfile></UserProfile>
-    ),
   },
   {
     path: "/login",

@@ -12,6 +12,7 @@ import {
   dateFormatter,
 } from "../utils/metricsUpdates";
 import Card from "../components/Card";
+import MapWithPolylines from "../components/MapWithPolylines";
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,14 +39,6 @@ export default function UserProfile() {
 
   // data manipulations
   const mainData = data?.data || [];
-  // const activities = mainData.map((activity) => {
-  //   return {
-  //     ...activity,
-  //     average_speed: fromMetersSecondToKmsHour(activity.average_speed),
-  //     distance: fromMetersToKms(activity.distance),
-  //     start_date: dateFormatter(activity.start_date),
-  //   };
-  // });
   const activities = mainData
 
   console.log(activities);
@@ -56,13 +49,13 @@ export default function UserProfile() {
         <Box
           sx={{
             marginTop: 2,
-            color: theme.palette.background.main.deepPurple600,
+            color: theme.palette.text.secondary,
             fontSize: 30,
             fontWeight: "bold",
           }}
         >
           {" "}
-          {token && "My last 12 Activities"}
+          {/* {token && "My last 12 Activities"} */}
           {!token && "Please authenticate"}
         </Box>
         <Box
@@ -75,7 +68,7 @@ export default function UserProfile() {
           }}
         >
           {activities.map((activity, index) => {
-            return <Card key={index} name={activity.name} />;
+            return <Card key={index} name={activity.name} city={activity.city.split(',')[0]} state={activity.city.split(',')[1]} />;
           })}
         </Box>
       </Box>
