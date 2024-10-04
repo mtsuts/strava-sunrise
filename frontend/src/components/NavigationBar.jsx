@@ -24,20 +24,20 @@ export default function NavigationBar() {
         }}
         className="text-white justify-between items-center flex gap-4 md:px-32 py-5 px-5 text-4xl"
       >
-        <Link to="/" sx={{ fontFamily: theme.typography.fontFamily }}>
-          Sunrise
+        <Link to="/">
+          <Box sx={{fontFamily: theme.typography.fontFamily}}>Sunrise</Box>
         </Link>
         <Box sx={{ display: "flex", alignItems: "end", gap: 2 }}>
           {!isLoading && token && (
             <Button
               sx={{
                 "&:hover": {
-                  bgcolor: theme.palette.background.paper,
+                  bgcolor: theme.palette.primary.main,
                   color: "#fff",
                 },
                 p: 1.5,
                 fontSize: 20,
-                bgcolor: "#fff",
+                bgcolor: theme.palette.primary.main,
                 color: theme.palette.text.secondary,
               }}
               onClick={toggleDrawer(true)}
@@ -64,10 +64,13 @@ export default function NavigationBar() {
                     bgcolor: theme.palette.background.secondary,
                     color: "#fff",
                   },
-                  p: 1.5,
-                  fontSize: 20,
-                  bgcolor: "#fff",
-                  color: theme.palette.text.secondary,
+                  px: 3,
+                  fontSize: 24,
+                  borderColor: theme.palette.primary.main,
+                  border: 1,
+                  borderRadius: 5,
+                  bgcolor: "transparent",
+                  color: theme.palette.text.primary,
                 }}
               >
                 Login
