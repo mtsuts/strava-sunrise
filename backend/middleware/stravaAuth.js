@@ -9,6 +9,7 @@ const validateCode = (code) => {
   }
   return true
 }
+
 const stravaAuth = async (req, res, next) => {
   const { code } = req.query
   try {

@@ -1,69 +1,25 @@
 const express = require('express')
 const router = express.Router()
-const axios = require('axios')
 const stravaAuth = require('../middleware/stravaAuth')
-const { saveActivities, fetchActivitiesById } = require('../db/supabase')
-const polyline = require('@mapbox/polyline')
-const { fromMetersSecondToKmsHour, fromMetersToKms, dateFormatter, fromSecondsToMins } = require('../utils/metricsUpdates')
-require('dotenv').config()
+const fetchData = require('../middleware/fetchData')
+const { createClient } = require('@supabase/supabase-js')
 
-router.get('/get-data', stravaAuth, async (req, res) => {
-  const { accessToken, athleteID } = req.session
+
+const supabaseKey = process.env.SUPABASE_KEY
+const supabaseUrl = process.env.SUPABASE_URL
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+router.get('/get-data', stravaAuth, fetchData, async (req, res) => {
+  const accessToken = req.session.accessToken
+  const userID = req.session.athleteID
+
   try {
-    if (!accessToken) {
-      throw new Error('Access token missing!')
-    }
-    const url = `https://www.strava.com/api/v3/athlete/activities?per_page=10&page=1`;
-    const response = await axios.get(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    const { data, error } = await supabase
+      .from('activities')
+      .select()
+      .eq('athleteID', userID)
 
-    const userId = response.data[0].athlete.id
-
-    const userData = response.data.map((d) => {
-      return {
-        name: d.name,
-        type: d.type,
-        athleteID: d.athlete.id,
-        activityID: d.id,
-        averageSpeed: fromMetersSecondToKmsHour(d.average_speed),
-        distance: fromMetersToKms(d.distance),
-        startDate: dateFormatter(d.start_date),
-        polyline: polyline.decode(d.map.summary_polyline),
-        startCoords: d.start_latlng,
-        endCoords: d.end_latlng,
-        elevatationGain: Math.floor(d.total_elevation_gain),
-        sportType: d.sport_type,
-        country: d.location_country,
-        movingTime: fromSecondsToMins(d.moving_time),
-        elevationHigh: Math.floor(d.elev_high),
-        elevationLow: Math.floor(d.elev_low)
-      }
-    })
-
-    const userDBData = await fetchActivitiesById(userId);
-
-    if (userDBData.length === 0) {
-      await saveActivities(userData);
-    } else {
-      const filteredUserData = userData.filter((activity) =>
-        !userDBData.some(d => Number(d.activityID) === activity.activityID)
-      );
-
-      if (filteredUserData.length > 0) {
-        await saveActivities(filteredUserData);
-      }
-    }
-
-    const updatedData = response.data.map((activity) => {
-      return {
-        ...activity,
-        map: polyline.decode(activity.map.summary_polyline),
-      }
-    })
-
-    return res.json({ data: updatedData, accessToken });
-
+    res.send({ data: data, accessToken })
   } catch (e) {
     res.status(500).send(e.message)
   }

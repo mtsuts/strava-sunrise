@@ -2,12 +2,10 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const stravaAuth = require('../middleware/stravaAuth')
-require('dotenv').config()
-
+const fetchData = require('../middleware/fetchData')
 
 router.get('/logout', stravaAuth, async (req, res) => {
   const { accessToken, athleteID } = req.session
-  console.log(req.session)
   try {
     // Deauthorize from Strava
     await axios.post('https://www.strava.com/oauth/deauthorize', null, {
@@ -15,6 +13,7 @@ router.get('/logout', stravaAuth, async (req, res) => {
         'Authorization': `Bearer ${accessToken}`
       }
     });
+    req.session.destroy();
     // Clear local session/token (example)
     console.log('User logged out and token revoked successfully');
     // You can clear tokens in your database, session, or cookies here

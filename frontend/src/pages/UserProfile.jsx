@@ -46,7 +46,7 @@ export default function UserProfile() {
   //     start_date: dateFormatter(activity.start_date),
   //   };
   // });
-  const activities = data
+  const activities = mainData
 
   console.log(activities);
 

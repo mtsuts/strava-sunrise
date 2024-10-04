@@ -10,11 +10,11 @@ export default function Logout() {
     axios
       .get("http://localhost:3000/logout", { withCredentials: true })
       .then((response) => {
-        window.location.href = "http://localhost:3001";
       })
       .catch((e) => {
         console.log(e);
       });
+      window.location.href = "http://localhost:3001";
   }, []);
   return (
     <div className="text-white p-5 text-center text-4xl">
