@@ -45,7 +45,7 @@ export default function UserProfile() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ textAlign: "center", fontSize: 20 }}>
+      <Box sx={{ textAlign: "center", margin: '0 auto', fontSize: 20 }}>
         <Box
           sx={{
             marginTop: 2,
@@ -62,13 +62,13 @@ export default function UserProfile() {
           sx={{
             display: "grid",
             gap: 2,
-            gridTemplateColumns: "repeat(4, 1fr)",
-            px: 16,
+            gridTemplateColumns: "repeat(2, 1fr)",
+            px: 32,
             py: 6,
           }}
         >
           {activities.map((activity, index) => {
-            return <Card key={index} name={activity.name} city={activity.city.split(',')[0]} state={activity.city.split(',')[1]} />;
+            return <Card key={index} data={activity} />;
           })}
         </Box>
       </Box>

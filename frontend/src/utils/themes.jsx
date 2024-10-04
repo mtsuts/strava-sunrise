@@ -1,62 +1,46 @@
 import { createTheme } from "@mui/material/styles";
-import { blueGrey, deepPurple, red, purple } from "@mui/material/colors";
-
-// const theme = createTheme({
-//   palette: {
-//     background: {
-//       main: {
-//         blueGrey800: blueGrey[800],
-//         deepPurple900: deepPurple[900],
-//         deepPurple600: deepPurple[600],
-//       },
-//       secondary: {
-//         purple500: purple[400],
-//         purple700: purple[700],
-//       },
-//     },
-//   },
-// });
 
 const theme = createTheme({
   palette: {
-    mode: "dark", // To ensure a dark (black) UI, use 'dark' mode
+    mode: "dark", 
     primary: {
-      main: "#ffffff", // White for primary color
+      main: "#4af0b7", 
     },
     background: {
-      default: "#000000", // Black background
-      paper: "#000000", // Black surfaces
+      default: "#212121", 
+      green: '#4af0b7',
+      paper: "#212121", 
     },
     text: {
-      primary: "#ffffff", // White text
-      secondary: "#000", // Grayish white for secondary text
+      primary: "#4af0b7", 
+      secondary: "#212121", 
     },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif", // Default font, feel free to change
-    fontSize: 12, // Smaller, condensed text
+    fontFamily: "Comfortaa, Arial, sans-serif", 
+    fontSize: 12,
     button: {
-      textTransform: "none", // Avoid all caps for buttons
+      textTransform: "none", 
     },
     h1: {
-      fontSize: "2rem", // Condensed headings
+      fontSize: "2rem", 
     },
     h2: {
       fontSize: "1.75rem",
     },
     body1: {
-      fontSize: "0.875rem", // Smaller body text
+      fontSize: "0.875rem", 
     },
     body2: {
-      fontSize: "0.75rem", // Even smaller body text for condensed feel
+      fontSize: "0.75rem", 
     },
   },
-  spacing: 4, // Condensed spacing, default is 8
+  spacing: 4, 
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         "*": {
-          transition: "none !important", // Disable animations
+          transition: "none !important", 
           animation: "none !important",
         },
       },
@@ -64,8 +48,8 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "4px", // Condensed buttons with sharp corners
-          padding: "4px 8px", // Condensed padding
+          borderRadius: "4px", 
+          padding: "4px 8px", 
           fontWeight: "bold",
         },
       },
@@ -73,22 +57,22 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          padding: "4px 8px", // Condensed input fields
+          padding: "4px 8px", 
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          padding: "8px", // Condensed padding in cards
-          boxShadow: "none", // Remove shadow for snappy, flat UI
+          padding: "8px", 
+          boxShadow: "none", 
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          padding: "4px 8px", // Condensed app bar
+          padding: "4px 8px", 
         },
       },
     },

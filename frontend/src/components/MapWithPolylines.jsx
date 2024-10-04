@@ -5,7 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const mapboxApi =
   "pk.eyJ1IjoibXRzdXRzIiwiYSI6ImNtMWxuemNiMTA3dW8ya3EzaTZ3OXJvbXgifQ.89CjEa8b7-RrRdrIrv83nA";
 
-const polylines = [
+const polylineTest = [
   [
     ["47.62966", "-122.34061"],
     ["47.62937", "-122.34055"],
@@ -397,7 +397,8 @@ const polylines = [
 ];
 
 
-export default function MapWithPolylines() {
+export default function MapWithPolylines(props) {
+  const polylines = [props.polyline.map((coord) => [parseFloat(coord[1]), parseFloat(coord[0])])]
   const [viewport, setViewport] = useState({
     latitude: polylines[0][0][1],
     longitude: polylines[0][0][0],
@@ -421,7 +422,7 @@ export default function MapWithPolylines() {
   return (
     <Map
       initialViewState={viewport}
-      style={{ width: "60%", height: "60vh", display: 'flex', alignItems:'center', justifyContent: 'center', margin:'0 auto' }}
+      style={{ width: "100%", height: "40vh", display: 'flex', alignItems:'center', justifyContent: 'center', margin:'0 auto' }}
       mapStyle="mapbox://styles/mapbox/navigation-night-v1"
       mapboxAccessToken={mapboxApi}
       onMove={(evt) => setViewport(evt.viewState)}
