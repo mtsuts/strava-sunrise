@@ -19,7 +19,24 @@ const fetchActivitiesById = async (userId) => {
     .from('activities')
     .select()
     .eq('athleteID', userId)
-    return data
+  return data
 }
 
-module.exports = { saveActivities, fetchActivitiesById }
+const saveAthleteStats = async (stravaData) => {
+  const { data, error } = await supabase
+    .from('atheleteStats')
+    .insert(stravaData)
+  if (error) {
+    console.log(error.message)
+  }
+}
+
+const fetchAthleteStatsById = async (userId) => {
+  const { data, error } = await supabase
+    .from('atheleteStats')
+    .select()
+    .eq('athleteID', userId)
+  return data
+}
+
+module.exports = { saveActivities, saveAthleteStats, fetchActivitiesById, fetchAthleteStatsById }
