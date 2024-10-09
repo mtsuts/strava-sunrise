@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import theme from "../utils/themes";
 import Card from "../components/Card";
 import CardsGrid from "../components/CardsGrid";
+import EffortCard from "../components/EffortCard";
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,7 +34,9 @@ export default function UserProfile() {
   }, []);
 
   // data manipulations
-  const activities = data?.data || [];
+  const stats = data?.data || [];
+  console.log(stats[0])
+
 
   return (
     <>
@@ -47,7 +50,8 @@ export default function UserProfile() {
         >
           {!token && "Please authenticate"}
         </Box>
-        <CardsGrid activities={activities} />
+        <EffortCard/>
+        {/* <CardsGrid activities={activities} /> */}
       </Box>
     </>
   );
