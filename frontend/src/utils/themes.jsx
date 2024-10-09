@@ -2,46 +2,47 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: "dark", 
+    mode: "dark",
     primary: {
-      main: "#4af0b7", 
+      main: "#4af0b7",
     },
     background: {
-      default: "#212121", 
-      green: '#4af0b7',
-      paper: "#212121", 
+      default: "#212121",
+      green: "#4af0b7",
+      paper: "#212121",
     },
     text: {
-      primary: "#4af0b7", 
-      secondary: "#212121", 
-      white: '#ffffff'    
+      primary: "#4af0b7",
+      secondary: "#212121",
+      white: "#ffffff",
     },
   },
+
   typography: {
-    fontFamily: "Comfortaa, Arial, sans-serif", 
+    fontFamily: "Inter, sans-serif",
     fontSize: 12,
     button: {
-      textTransform: "none", 
+      textTransform: "none",
     },
     h1: {
-      fontSize: "2rem", 
+      fontSize: "2rem",
     },
     h2: {
       fontSize: "1.75rem",
     },
     body1: {
-      fontSize: "0.875rem", 
+      fontSize: "0.875rem",
     },
     body2: {
-      fontSize: "0.75rem", 
+      fontSize: "0.75rem",
     },
   },
-  spacing: 4, 
+  spacing: 4,
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         "*": {
-          transition: "none !important", 
+          transition: "none !important",
           animation: "none !important",
         },
       },
@@ -49,8 +50,8 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "4px", 
-          padding: "4px 8px", 
+          borderRadius: "4px",
+          padding: "4px 8px",
           fontWeight: "bold",
         },
       },
@@ -58,22 +59,22 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          padding: "4px 8px", 
+          padding: "4px 8px",
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          padding: "8px", 
-          boxShadow: "none", 
+          padding: "8px",
+          boxShadow: "none",
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          padding: "4px 8px", 
+          padding: "4px 8px",
         },
       },
     },

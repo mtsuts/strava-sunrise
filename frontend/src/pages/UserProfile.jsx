@@ -6,13 +6,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { GetActivities } from "../api/api";
 import { useSearchParams } from "react-router-dom";
 import theme from "../utils/themes";
-import {
-  fromMetersSecondToKmsHour,
-  fromMetersToKms,
-  dateFormatter,
-} from "../utils/metricsUpdates";
 import Card from "../components/Card";
-import MapWithPolylines from "../components/MapWithPolylines";
+import CardsGrid from "../components/CardsGrid";
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,17 +33,13 @@ export default function UserProfile() {
   }, []);
 
   // data manipulations
-  const mainData = data?.data || [];
-  const activities = mainData
-
-  console.log(activities);
+  const activities = data?.data || [];
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ textAlign: "center", margin: '0 auto', fontSize: 20 }}>
+    <>
+      <Box>
         <Box
           sx={{
-            marginTop: 2,
             color: theme.palette.text.secondary,
             fontSize: 30,
             fontWeight: "bold",
@@ -56,20 +47,8 @@ export default function UserProfile() {
         >
           {!token && "Please authenticate"}
         </Box>
-        <Box
-          sx={{
-            display: "grid",
-            gap: 2,
-            gridTemplateColumns: "repeat(2, 1fr)",
-            px: 32,
-            py: 6,
-          }}
-        >
-          {activities.map((activity, index) => {
-            return <Card key={index} data={activity} />;
-          })}
-        </Box>
+        <CardsGrid activities={activities} />
       </Box>
-    </ThemeProvider>
+    </>
   );
 }
