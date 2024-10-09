@@ -7,7 +7,7 @@ export default function CardsGrid(props) {
       sx={{
         display: "grid",
         gap: 2,
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: {sm: "repeat(4, 1fr)", xs: "repeat(1, 1fr)"},
         // px: 32,
         py: 6,
       }}

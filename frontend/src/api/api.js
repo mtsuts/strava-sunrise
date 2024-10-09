@@ -19,3 +19,4 @@ export const GetActivities = async () => {
     console.log(e.message)
   }
 }
+

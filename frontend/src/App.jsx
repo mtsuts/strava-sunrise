@@ -7,12 +7,12 @@ import { AppContext } from "./components/AppContext";
 import theme from "./utils/themes";
 import { GetActivities } from "./api/api";
 import { Box, Container } from "@mui/material";
+import ResponsiveAppBar from "./components/ResponsiveAppBar";
 
 
 function App() {
 
   const { data, setData } = useContext(AppContext);
-  console.log(data);
   const dataLoaded = useRef(false);
 
   const location = useLocation();
@@ -29,8 +29,8 @@ function App() {
           minHeight: "100vh",
         }}
       >
-        <NavigationBar />
-          <Container maxWidth={'lg'} sx={{py: 10}}>
+        <ResponsiveAppBar />
+          <Container maxWidth={'lg'} sx={{py: 28}}>
           <Outlet />
           </Container>
       </Box>
