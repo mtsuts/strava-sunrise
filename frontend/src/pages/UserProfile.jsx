@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import * as d3 from "d3";
+import React, { useEffect, useRef, useContext } from "react";
 import { AppContext } from "../components/AppContext";
 import { Box } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
 import { GetActivities } from "../api/api";
 import { useSearchParams } from "react-router-dom";
 import theme from "../utils/themes";
-import Card from "../components/Card";
 import CardsGrid from "../components/CardsGrid";
-import EffortCard from "../components/EffortCard";
+import SearchBox from "../components/SearchBox";
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,15 +31,15 @@ export default function UserProfile() {
   }, []);
 
   // data manipulations
-  const stats = data?.data || [];
-  console.log(stats[0])
-
+  const activities = data?.data || [];
 
   return (
     <>
       <Box>
+        <SearchBox/>
         <Box
           sx={{
+            marginTop: 4,
             color: theme.palette.text.secondary,
             fontSize: 30,
             fontWeight: "bold",
@@ -50,8 +47,8 @@ export default function UserProfile() {
         >
           {!token && "Please authenticate"}
         </Box>
-        <EffortCard/>
-        {/* <CardsGrid activities={activities} /> */}
+        {/* <EffortCard data={stats[0] || []}/> */}
+        <CardsGrid activities={activities} />
       </Box>
     </>
   );

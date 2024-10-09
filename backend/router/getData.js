@@ -15,7 +15,7 @@ router.get('/get-data', stravaAuth, fetchData, async (req, res) => {
 
   try {
     const { data, error } = await supabase
-      .from('atheleteStats')
+      .from('activities')
       .select()
       .eq('athleteID', userID)
 
