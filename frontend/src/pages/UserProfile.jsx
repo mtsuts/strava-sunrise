@@ -54,8 +54,6 @@ export default function UserProfile() {
             fontWeight: "bold",
           }}
         >
-          {" "}
-          {/* {token && "My last 12 Activities"} */}
           {!token && "Please authenticate"}
         </Box>
         <Box
