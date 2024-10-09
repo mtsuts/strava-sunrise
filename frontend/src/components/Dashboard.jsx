@@ -8,7 +8,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import theme from "../utils/themes";
-import { ThemeProvider } from "@mui/material/styles";
 import { useContext } from "react";
 import { AppContext } from "./AppContext";
 
@@ -20,11 +19,11 @@ export default function Dashboard(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Box sx={{ bgcolor: theme.palette.background.default, fontSize: 30  }}>
         <Drawer 
           anchor="right"
-          transitionDuration={1000}
+          // transitionDuration={800}
           open={open}
           onClose={toggleDrawer(false)}
         >
@@ -53,6 +52,6 @@ export default function Dashboard(props) {
           </Box>
         </Drawer>
       </Box>
-    </ThemeProvider>
+    </>
   );
 }

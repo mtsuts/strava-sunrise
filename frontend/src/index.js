@@ -11,7 +11,10 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import UserProfile from './pages/UserProfile';
 import { AppProvider } from './components/AppContext';
+import theme from './utils/themes';
 import Test from './pages/Test';
+import HomePage from './pages/HomePage';
+import { ThemeProvider } from '@emotion/react';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,10 @@ const router = createBrowserRouter([
       <App></App>
     ),
     children: [
+      {
+        index: true,
+        element: <HomePage />
+      },
       {
         path: "my-profile",
         element: (
@@ -50,10 +57,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AppProvider>
-      <RouterProvider router={router} />
-    </AppProvider>
-  </React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <AppProvider>
+        <RouterProvider router={router} />
+      </AppProvider>
+    </ThemeProvider>
+  </React.StrictMode >
 );
 
 
