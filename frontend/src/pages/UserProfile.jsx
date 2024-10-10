@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { AppContext } from "../components/AppContext";
-import { Box } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 import { GetActivities } from "../api/api";
 import { useSearchParams } from "react-router-dom";
 import theme from "../utils/themes";
 import CardsGrid from "../components/CardsGrid";
 import SearchBox from "../components/SearchBox";
+import PaginationRounded from "../components/Pagination";
 
 export default function UserProfile() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, setData, isLoading, setIsLoading } = useContext(AppContext);
+  const { data, setData, isLoading, setIsLoading, activityInput, page } =
+    useContext(AppContext);
   const dataLoaded = useRef(false);
+  console.log(page);
 
   const token = localStorage.getItem("token");
   // load data
@@ -31,12 +34,29 @@ export default function UserProfile() {
   }, []);
 
   // data manipulations
-  const activities = data?.data || [];
+  const receivedData = data?.data || [];
+  let activities = receivedData.filter((d) => d.type === 'Ride')
+  const itemsShow = 4;
+  const currentPage = page;
+  let currentPageData = [];
+
+  // activity filtering
+  if (activityInput) {
+    activities = activities.filter((d) =>
+      d.name.toLowerCase().includes(activityInput)
+    );
+  }
+  currentPageData = activities.slice(
+    itemsShow * (currentPage - 1),
+    itemsShow * currentPage
+  );
+  console.log(currentPageData);
+  console.log(activities)
 
   return (
     <>
       <Box>
-        <SearchBox/>
+        <SearchBox />
         <Box
           sx={{
             marginTop: 4,
@@ -48,7 +68,8 @@ export default function UserProfile() {
           {!token && "Please authenticate"}
         </Box>
         {/* <EffortCard data={stats[0] || []}/> */}
-        <CardsGrid activities={activities} />
+        <CardsGrid bind={activityInput} activities={currentPageData} />
+        <PaginationRounded length={Math.ceil(activities.length / 4)} />
       </Box>
     </>
   );

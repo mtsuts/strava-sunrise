@@ -23,10 +23,10 @@ const settings = [
     label: "Profile",
     link: "/my-profile",
   },
-  {
-    label: "Dashboard",
-    link: "/my-dashboard",
-  },
+  // {
+  //   label: "Dashboard",
+  //   link: "/my-dashboard",
+  // },
   {
     label: "Logout",
     link: "/logout",

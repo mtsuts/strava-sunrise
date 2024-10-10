@@ -21,6 +21,8 @@ const fetchData = async (req, res, next) => {
       // userID
       const userId = activitiesResponse.data[0].athlete.id
 
+      console.log(activitiesResponse.data)
+
       // save and fetch user activities
       const userActivities = await Promise.all(activitiesResponse.data.map(async (d) => {
         return {
@@ -40,7 +42,8 @@ const fetchData = async (req, res, next) => {
           movingTime: fromSecondsToMins(d.moving_time),
           elevationHigh: Math.floor(d.elev_high),
           elevationLow: Math.floor(d.elev_low),
-          city: await geocode(d.start_latlng[0], d.start_latlng[1])
+          city: 'test'
+          // await geocode(d.start_latlng[0], d.start_latlng[1])
         }
       }))
 

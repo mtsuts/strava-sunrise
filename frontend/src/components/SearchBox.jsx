@@ -5,8 +5,6 @@ export default function SearchBox() {
   return (
     <Box>
       <Box sx={{ marginBottom: 2, fontWeight: 500, fontSize: 20 }}>
-        {" "}
-        Find activity
       </Box>
       <Box sx={{ width: "20%" }}>
         <SearchBar />
