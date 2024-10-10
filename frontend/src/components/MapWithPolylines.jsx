@@ -6,10 +6,15 @@ import { AppContext } from "./AppContext";
 const mapboxApi = process.env.REACT_APP_MAPBOX_API;
 
 export default function MapWithPolylines(props) {
-  const {viewport,setViewport} = useContext(AppContext);
   const polylines = [
     props.polyline.map((coord) => [parseFloat(coord[1]), parseFloat(coord[0])]),
   ];
+
+  const [viewport, setViewport] = useState({
+    latitude: polylines[0][0][1],
+    longitude: polylines[0][0][0],
+    zoom: 10,
+  });
 
   // Create GeoJSON for the polylines
   const geojsonData = {

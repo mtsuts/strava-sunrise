@@ -13,7 +13,7 @@ export default function UserProfile() {
   const { data, setData, isLoading, setIsLoading, activityInput, page } =
     useContext(AppContext);
   const dataLoaded = useRef(false);
-  console.log(page);
+
 
   const token = localStorage.getItem("token");
   // load data
@@ -35,7 +35,9 @@ export default function UserProfile() {
 
   // data manipulations
   const receivedData = data?.data || [];
-  let activities = receivedData.filter((d) => d.type === 'Ride')
+  let activities = receivedData
+    .filter((d) => d.type === "Ride")
+    .filter((d) => d.polyline.length !== 0);
   const itemsShow = 4;
   const currentPage = page;
   let currentPageData = [];
@@ -51,7 +53,6 @@ export default function UserProfile() {
     itemsShow * currentPage
   );
   console.log(currentPageData);
-  console.log(activities)
 
   return (
     <>
@@ -69,7 +70,7 @@ export default function UserProfile() {
         </Box>
         {/* <EffortCard data={stats[0] || []}/> */}
         <CardsGrid bind={activityInput} activities={currentPageData} />
-        <PaginationRounded length={Math.ceil(activities.length / 4)} />
+        <PaginationRounded length={Math.ceil(activities.length / itemsShow)} />
       </Box>
     </>
   );
