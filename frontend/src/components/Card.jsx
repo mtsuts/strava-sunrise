@@ -8,22 +8,22 @@ export default function Card(props) {
       <Box
         sx={{
           fontSize: 20,
-          bgcolor: theme.palette.background.green,
+          backgroundColor: theme.palette.text.white,
           color: theme.palette.text.secondary,
           p: 4,
-          borderRadius: 4,
+          borderRadius: 1,
           width: "100%",
-          textAlign: "center",
+          textAlign: "left",
           margin: "0 auto",
         }}
         onClick={props.onClick}
       >
-        <Box sx={{ fontWeight: "medium", fontSize: 30 }}>
-          {" "}
-          {props.data.name}{" "}
+        <Box>
+          <MapWithPolylines polyline={props.data.polyline} />
         </Box>
-        <Box>{props.data.city.split(",")[0]} </Box>
-        <Box>{/* <MapWithPolylines polyline={props.data.polyline} /> */}</Box>
+        <Box sx={{ fontWeight: "medium", fontSize: 23 }}>
+          {props.data.name}
+        </Box>
       </Box>
     </>
   );
