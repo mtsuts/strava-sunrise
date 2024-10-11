@@ -35,7 +35,7 @@ export default function MapWithPolylines(props) {
       initialViewState={viewport}
       style={{
         width: "100%",
-        height: "200px",
+        height: "180px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

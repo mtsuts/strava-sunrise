@@ -42,8 +42,7 @@ const fetchData = async (req, res, next) => {
           movingTime: fromSecondsToMins(d.moving_time),
           elevationHigh: Math.floor(d.elev_high),
           elevationLow: Math.floor(d.elev_low),
-          city: 'test'
-          // await geocode(d.start_latlng[0], d.start_latlng[1])
+          city: await geocode(d.start_latlng[0], d.start_latlng[1])
         }
       }))
 
