@@ -39,4 +39,19 @@ const fetchAthleteStatsById = async (userId) => {
   return data
 }
 
-module.exports = { saveActivities, saveAthleteStats, fetchActivitiesById, fetchAthleteStatsById }
+const saveRoutes = async (activity) => {
+  const { data, error } = await supabase
+    .from('routes')
+    .insert(activity)
+  if (error) {
+    console.log(error.message)
+  }
+}
+
+const fetchRoutes = async (routes) => {
+  const { data, error } = await supabase
+    .from('routes')
+    .select()
+}
+
+module.exports = { saveActivities, saveAthleteStats, fetchActivitiesById, fetchAthleteStatsById, saveRoutes, fetchRoutes }

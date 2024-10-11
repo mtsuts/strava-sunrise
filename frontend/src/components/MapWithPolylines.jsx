@@ -35,15 +35,19 @@ export default function MapWithPolylines(props) {
       initialViewState={viewport}
       style={{
         width: "100%",
-        height: "200px",
+        height: "180px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         margin: "0 auto",
       }}
-      mapStyle="mapbox://styles/mapbox/navigation-night-v1"
+      mapStyle="mapbox://styles/mapbox/outdoors-v12"
       mapboxAccessToken={mapboxApi}
       onMove={(evt) => setViewport(evt.viewState)}
+      scrollZoom={false} // Disable scroll zoom
+      dragPan={false} // Disable dragging (panning)
+      doubleClickZoom={false} // Disable zoom on double-click
+      touchZoomRotate={false} // Disable touch-based zoom and rotate
     >
       {/* Add the polylines as a source */}
       <Source id="polylineSource" type="geojson" data={geojsonData}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Slide, Box } from "@mui/material";
+import { Slide, Box, Button } from "@mui/material";
 import pathImage from "../images/path.JPG";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
@@ -36,9 +37,29 @@ export default function HomePage() {
               other cyclists?
             </Box>
             <Box sx={{ marginTop: 4 }}>
-              Here is how you can do it: Authorize with Strava by clicking
-              'Share your route' and select the activity you'd like to share as
-              a route worldwide.
+              <Box>
+                {" "}
+                Here is how you can do it: Authorize with Strava by clicking
+                button below and select the activity you'd like to share as a
+                route worldwide.
+              </Box>
+              {/* {!isLoading && !token && ( */}
+              <Link to="/login">
+                {" "}
+                <Button
+                  variant="outlined"
+                  sx={{
+                    marginTop: 2,
+                    px: 3,
+                    fontSize: "1rem",
+                    fontWeight: "400",
+                    bgcolor: "transparent",
+                  }}
+                >
+                  Share your route
+                </Button>
+              </Link>
+              {/* )} */}
             </Box>
           </Box>
         </Box>
