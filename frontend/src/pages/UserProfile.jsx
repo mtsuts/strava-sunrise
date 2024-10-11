@@ -69,6 +69,7 @@ export default function UserProfile() {
           {!token && "Please authenticate"}
         </Box>
         {/* <EffortCard data={stats[0] || []}/> */}
+        
         <CardsGrid bind={activityInput} activities={currentPageData} />
         <PaginationRounded length={Math.ceil(activities.length / itemsShow)} />
       </Box>

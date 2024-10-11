@@ -2,7 +2,7 @@ const axios = require('axios')
 const { saveActivities, saveAthleteStats, fetchActivitiesById, fetchAthleteStatsById } = require('../db/supabase')
 const { fromMetersSecondToKmsHour, fromMetersToKms, dateFormatter, fromSecondsToMins } = require('../utils/metricsUpdates')
 const geocode = require('../utils/geocoding')
-const { activities, athletesStats } = require('./data')
+const { activities, athletesStats, stravaAthlete } = require('./data')
 const polyline = require('@mapbox/polyline')
 
 
@@ -17,7 +17,10 @@ const fetchData = async (req, res, next) => {
     if (code) {
       const activitiesResponse = await activities(accessToken)
       const athletesStatsResponse = await athletesStats(accessToken, athleteID)
+      const stravaAthleteData = await stravaAthlete(accessToken)
 
+      console.log(stravaAthleteData)
+      
       // userID
       const userId = activitiesResponse.data[0].athlete.id
 

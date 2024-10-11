@@ -1,5 +1,5 @@
 const axios = require('axios')
-const activitiesURL = `https://www.strava.com/api/v3/athlete/activities?per_page=100&page=1`;
+const activitiesURL = `https://www.strava.com/api/v3/athlete/activities?per_page=100&page=2`;
 
 
 const activities = async (accessToken) => {
@@ -17,4 +17,12 @@ const athletesStats = async (accessToken, athleteID) => {
   return response.data
 }
 
-module.exports = { activities, athletesStats }
+const stravaAthlete = async (accessToken) => {
+  const athleteURL = `https://www.strava.com/api/v3/athlete`
+  const response = await axios.get(athleteURL, {
+    headers: { Authorization: `Bearer ${accessToken}` }
+  })
+  return response
+}
+
+module.exports = { activities, athletesStats, stravaAthlete }

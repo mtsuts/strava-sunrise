@@ -9,9 +9,7 @@ import { GetActivities } from "./api/api";
 import { Box, Container } from "@mui/material";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 
-
 function App() {
-
   const { data, setData } = useContext(AppContext);
   const dataLoaded = useRef(false);
 
@@ -19,21 +17,21 @@ function App() {
   const isHomePage = false && location.pathname === "/";
 
   return (
-      <Box
-        sx={{
-          fontFamily: theme.typography.fontFamily.inter,
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.white,
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-        }}
-      >
-        <ResponsiveAppBar />
-          <Container maxWidth={'lg'} sx={{py: 28}}>
-          <Outlet />
-          </Container>
-      </Box>
+    <Box
+      sx={{
+        fontFamily: theme.typography.fontFamily.inter,
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.white,
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <ResponsiveAppBar />
+      <Container maxWidth={"lg"} sx={{ py: 28, px: { sm: 0, xs: 5 } }}>
+        <Outlet />
+      </Container>
+    </Box>
   );
 }
 
