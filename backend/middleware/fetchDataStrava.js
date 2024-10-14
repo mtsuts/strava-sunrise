@@ -11,13 +11,11 @@ const fetchAthlete = async (req, res, next) => {
   try {
     const { code } = req.query
     const accessToken = req.session.accessToken
-    const athleteID = req.session.athleteID
+    
     if (!accessToken) {
       throw new Error('Access token missing!')
     }
     if (code) {
-      const activitiesResponse = await activities(accessToken)
-      const athletesStatsResponse = await athletesStats(accessToken, athleteID)
       const stravaAthleteData = await stravaAthlete(accessToken)
 
       const athleteData = [
@@ -31,12 +29,8 @@ const fetchAthlete = async (req, res, next) => {
         }
       ]
 
-      // userID
-      const userID = stravaAthleteData.data.id
-
-      // fetchathletes
+      // fetch athletes from supabase database
       const athletesDB = await fetchAthletes()
-
 
       if (athletesDB.length === 0) {
         await saveAthleteData(athleteData);

@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-axios.defaults.withCredentials = true;
 
-export const GetActivities = async () => {
+export const GetAthlete = async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
   let url = `http://localhost:3000/get-athlete`
@@ -14,6 +13,18 @@ export const GetActivities = async () => {
       withCredentials: true,
     })
     localStorage.setItem('token', response.data.accessToken)
+    return response.data
+  } catch (e) {
+    console.log(e.message)
+  }
+}
+
+export const GetActivity = async () => {
+  const url = 'http://localhost:3000/get-activities'
+  try {
+    const response = await axios.get(url, {
+      withCredentials: true
+    })
     return response.data
   } catch (e) {
     console.log(e.message)

@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [activityInput, setActivityInput] = useState("");
   const [page, setPage] = useState(1);
+  const [avatar, setAvatar] = useState("");
 
   const login = () => {
     setIsLoggedIn(true);
@@ -32,8 +33,10 @@ export const AppProvider = ({ children }) => {
         open,
         activityInput,
         setActivityInput,
-        page, 
-        setPage, 
+        page,
+        setPage,
+        avatar,
+        setAvatar,
       }}
     >
       {children}
