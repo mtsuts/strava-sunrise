@@ -10,15 +10,11 @@ const fetchAthlete = async (req, res, next) => {
   try {
     const { code } = req.query
     const accessToken = req.session.accessToken
-    const athleteID = req.session.athleteID
     if (!accessToken) {
       throw new Error('Access token missing!')
     }
     if (code) {
-      const activitiesResponse = await activities(accessToken)
-      const athletesStatsResponse = await athletesStats(accessToken, athleteID)
       const stravaAthleteData = await stravaAthlete(accessToken)
-
       const athleteData = [
         {
           athleteID: stravaAthleteData.data.id,
@@ -36,7 +32,6 @@ const fetchAthlete = async (req, res, next) => {
       // fetchathletes
       const athletesDB = await fetchAthletes()
 
-
       if (athletesDB.length === 0) {
         await saveAthleteData(athleteData);
       } else {
@@ -48,8 +43,8 @@ const fetchAthlete = async (req, res, next) => {
           await saveAthleteData(filtereduserAthletes);
         }
       }
-      next()
     }
+    next()
   } catch (e) {
     res.status(500).send(e.message)
   }
