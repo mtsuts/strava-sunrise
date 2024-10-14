@@ -47,7 +47,7 @@ const pages = [
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { isLoading, open, setOpen } = useContext(AppContext);
+  const { isLoading, open, setOpen, avatar } = useContext(AppContext);
   const token = localStorage.getItem("token");
 
   const handleOpenNavMenu = (event) => {
@@ -198,7 +198,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar src="/static/images/avatar/2.jpg" />
+                  <Avatar src={avatar} />
                 </IconButton>
               </Tooltip>
               <Menu
