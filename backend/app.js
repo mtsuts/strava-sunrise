@@ -3,7 +3,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const cors = require('cors')
 const authRouter = require('./router/auth')
-const getDataRouter = require('./router/getAthlete')
+const getAthleteRouter = require('./router/getAthlete')
 const logoutRouter = require('./router/logout')
 require('dotenv').config()
 require('./db/mongoose')
@@ -40,7 +40,7 @@ app.use(session({
 app.use(authRouter)
 
 // save data from strava into the database and get from the database
-app.use(getDataRouter)
+app.use(getAthleteRouter)
 
 // logout from strava
 app.use(logoutRouter)
