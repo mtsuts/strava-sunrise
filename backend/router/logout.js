@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const stravaAuth = require('../middleware/stravaAuth')
-const fetchData = require('../middleware/fetchData')
+const fetchData = require('../middleware/fetchDataStrava')
 
 router.get('/logout', stravaAuth, async (req, res) => {
   const { accessToken, athleteID } = req.session

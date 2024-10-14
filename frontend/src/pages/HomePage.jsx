@@ -23,7 +23,7 @@ export default function HomePage() {
             fontSize: 20,
           }}
         >
-          <Box sx={{ flexShrink: 1, textAlign: "left" }}>
+          <Box sx={{ width: {sm: '50%', xs: '100%'}, textAlign: "left" }}>
             <img
               src={pathImage}
               alt="path"
@@ -31,7 +31,7 @@ export default function HomePage() {
             />
           </Box>
 
-          <Box sx={{ flexShrink: 20, textAlign: "left" }}>
+          <Box sx={{ width: {sm: '50%', xs: '100%'}, textAlign: "left" }}>
             <Box sx={{ fontSize: 28, fontWeight: "medium" }}>
               You went on a unique ride and would love to share the route with
               other cyclists?
@@ -43,7 +43,6 @@ export default function HomePage() {
                 button below and select the activity you'd like to share as a
                 route worldwide.
               </Box>
-              {/* {!isLoading && !token && ( */}
               <Link to="/login">
                 {" "}
                 <Button
@@ -59,9 +58,10 @@ export default function HomePage() {
                   Share your route
                 </Button>
               </Link>
-              {/* )} */}
             </Box>
           </Box>
+
+
         </Box>
       </Slide>
 

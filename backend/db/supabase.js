@@ -14,11 +14,11 @@ const saveActivities = async (stravaData) => {
   }
 }
 
-const fetchActivitiesById = async (userId) => {
+const fetchActivitiesById = async (userID) => {
   const { data, error } = await supabase
     .from('activities')
     .select()
-    .eq('athleteID', userId)
+    .eq('athleteID', userID)
   return data
 }
 
@@ -31,11 +31,11 @@ const saveAthleteStats = async (stravaData) => {
   }
 }
 
-const fetchAthleteStatsById = async (userId) => {
+const fetchAthleteStatsById = async (userID) => {
   const { data, error } = await supabase
     .from('atheleteStats')
     .select()
-    .eq('athleteID', userId)
+    .eq('athleteID', userID)
   return data
 }
 
@@ -48,10 +48,27 @@ const saveRoutes = async (activity) => {
   }
 }
 
-const fetchRoutes = async (routes) => {
+const fetchRoutes = async () => {
   const { data, error } = await supabase
     .from('routes')
     .select()
 }
 
-module.exports = { saveActivities, saveAthleteStats, fetchActivitiesById, fetchAthleteStatsById, saveRoutes, fetchRoutes }
+const saveAthleteData = async (athlete) => {
+  const { data, error } = await supabase
+    .from('athletes')
+    .insert(athlete)
+  if (error) {
+    console.log(error.message)
+  }
+}
+
+const fetchAthletes = async () => {
+  const { data, error } = await supabase
+    .from('athletes')
+    .select("*")
+
+  return data
+}
+
+module.exports = { saveActivities, saveAthleteStats, fetchActivitiesById, fetchAthleteStatsById, saveRoutes, fetchRoutes, saveAthleteData, fetchAthletes }

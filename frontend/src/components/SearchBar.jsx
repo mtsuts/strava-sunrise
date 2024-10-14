@@ -52,7 +52,7 @@ export default function SearchBar() {
         width: "20ch",
       },
       [theme.breakpoints.up("xs")]: {
-        width: "100ch",
+        width: "20ch",
       },
     },
   }));
