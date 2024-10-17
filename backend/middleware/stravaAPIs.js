@@ -1,8 +1,7 @@
 const axios = require('axios')
 
-
-const activities = async (accessToken) => {
-  const activitiesURL = `https://www.strava.com/api/v3/athlete/activities?per_page=100&page=2`;
+const activities = async (accessToken, before, after) => {
+  const activitiesURL = `https://www.strava.com/api/v3/athlete/activities?before=${before}&after=${after}`;
   const response = await axios.get(activitiesURL, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });

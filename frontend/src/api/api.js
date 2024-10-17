@@ -19,8 +19,8 @@ export const GetAthlete = async () => {
   }
 }
 
-export const GetActivity = async () => {
-  const url = 'http://localhost:3000/get-activities'
+export const GetActivity = async (before, after) => {
+  const url = `http://localhost:3000/get-activities?before=${before}&after=${after}`
   try {
     const response = await axios.get(url, {
       withCredentials: true
@@ -30,4 +30,3 @@ export const GetActivity = async () => {
     console.log(e.message)
   }
 }
-

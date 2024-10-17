@@ -8,8 +8,13 @@ import CardsGrid from "../components/CardsGrid";
 import SearchBox from "../components/SearchBox";
 import PaginationRounded from "../components/Pagination";
 import AthleteDashboard from "../components/AthleteDashboard";
+import Activities from "../components/Activities";
+
+
+
 
 export default function UserProfile() {
+
   const [searchParams, setSearchParams] = useSearchParams();
   const {
     data,
@@ -34,6 +39,7 @@ export default function UserProfile() {
       .then((data) => {
         setSearchParams({});
         setData(data);
+        console.log(data)
         localStorage.setItem("token", data.accessToken);
         const athleteAvatar = data?.data[0].avatar || "";
         setAvatar(athleteAvatar)
@@ -48,11 +54,10 @@ export default function UserProfile() {
   const athleteName = athlete[0]?.name || "";
 
 
-
-
   return (
     <>
       <AthleteDashboard name={athleteName} />
+      <Activities/>
     </>
   );
 }

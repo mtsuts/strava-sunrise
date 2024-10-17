@@ -19,7 +19,7 @@ router.get('/get-athlete', stravaAuth, fetchAthlete, async (req, res) => {
       .select()
       .eq('athleteID', userID)
 
-    res.send({ data })
+    res.send({ data, accessToken })
   } catch (e) {
     res.status(500).send(e.messaxge)
   }
