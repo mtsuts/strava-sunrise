@@ -5,6 +5,7 @@ const cors = require('cors')
 const authRouter = require('./router/auth')
 const getAthleteRouter = require('./router/getAthlete')
 const logoutRouter = require('./router/logout')
+const activitiesRouter = require('./router/getActivities')
 require('dotenv').config()
 require('./db/mongoose')
 
@@ -44,6 +45,9 @@ app.use(getAthleteRouter)
 
 // logout from strava
 app.use(logoutRouter)
+
+// get athlete activities
+app.use(activitiesRouter)
 
 
 
