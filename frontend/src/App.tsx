@@ -5,7 +5,7 @@ import NavigationBar from "./components/NavigationBar";
 import { Outlet } from "react-router-dom";
 import { AppContext } from "./components/AppContext";
 import theme from "./utils/themes";
-import { GetActivities } from "./api/api";
+// import { GetActivities } from "./api/api";
 import { Box, Container } from "@mui/material";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 
@@ -19,9 +19,9 @@ function App() {
   return (
     <Box
       sx={{
-        fontFamily: theme.typography.fontFamily.inter,
+        fontFamily: theme.typography.fontFamily,
         backgroundColor: theme.palette.background.default,
-        color: theme.palette.text.white,
+        color: "#ffffff",
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
