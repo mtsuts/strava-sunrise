@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./App.css";
-import NavigationBar from "./components/NavigationBar";
 import { Outlet } from "react-router-dom";
 import { AppContext } from "./components/AppContext";
 import theme from "./utils/themes";
@@ -10,11 +9,16 @@ import { Box, Container } from "@mui/material";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 
 function App() {
-  const { data, setData } = useContext(AppContext);
-  const dataLoaded = useRef(false);
-
+  const { avatar, setAvatar } = useContext(AppContext);
+  const athelteAvatar = localStorage.getItem("avatar");
   const location = useLocation();
-  const isHomePage = false && location.pathname === "/";
+
+
+  useEffect(() => {
+    if (!avatar) {
+      setAvatar(athelteAvatar);
+    }
+  }, []);
 
   return (
     <Box

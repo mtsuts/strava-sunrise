@@ -1,20 +1,29 @@
+import React from "react";
 import { Box } from "@mui/material";
 import theme from "../utils/themes";
 import MapWithPolylines from "./MapWithPolylines";
 import Button from "@mui/material/Button";
 
-export default function Card(props) {
-  const activityUrl = `https://www.strava.com/activities/${props.data.activityID}`;
+interface CardProps {
+  activityID: String,
+  polyline: [],
+  activityName: String,
+  city: String, 
+  athleteID: String,
+}
+
+export default function Card({ activityID, polyline, activityName, city, athleteID }: CardProps) {
+  const activityUrl = `https://www.strava.com/activities/${activityID}`;
 
   function handleAddButtonClick() {
-    console.log(props.data.activityID)
+    console.log(activityID);
   }
   return (
     <>
       <Box
         sx={{
           fontSize: 20,
-          backgroundColor: theme.palette.text.white,
+          backgroundColor: "#ffffff",
           color: theme.palette.text.secondary,
           p: 4,
           borderRadius: 1,
@@ -22,7 +31,7 @@ export default function Card(props) {
           textAlign: "left",
           margin: "0 auto",
         }}
-        onClick={props.onClick}
+        // onClick={onClick}
       >
         <Button
           onClick={handleAddButtonClick}
@@ -33,13 +42,13 @@ export default function Card(props) {
         </Button>
         <a target="_blank" href={activityUrl}>
           <Box>
-            <MapWithPolylines polyline={props.data.polyline} />
+            <MapWithPolylines polyline={polyline} />
           </Box>
           <Box sx={{ fontWeight: "medium", fontSize: 23, marginTop: 2 }}>
-            {props.data.name}
+            {activityName}
           </Box>
-          <Box sx={{ fontSize: 12 }}> {props.data.city}</Box>
-          <Box sx={{ fontSize: 12 }}> Author: {props.data.athleteID}</Box>
+          <Box sx={{ fontSize: 12 }}> {city}</Box>
+          <Box sx={{ fontSize: 12 }}> Author: {athleteID}</Box>
         </a>
       </Box>
     </>

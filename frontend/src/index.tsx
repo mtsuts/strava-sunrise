@@ -9,7 +9,6 @@ import Logout from "./pages/Logout";
 import UserProfile from "./pages/UserProfile";
 import { AppProvider } from "./components/AppContext";
 import theme from "./utils/themes";
-import Test from "./pages/Test";
 import HomePage from "./pages/HomePage";
 import { ThemeProvider } from "@emotion/react";
 
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
       {
         path: "my-profile",
         element: <UserProfile></UserProfile>,
-      },
-      {
-        path: "test",
-        element: <Test></Test>,
       },
       {
         path: "/logout",

@@ -28,7 +28,6 @@ export default function UserProfile() {
   } = useContext(AppContext);
   const dataLoaded = useRef(false);
 
-  const token = localStorage.getItem("token");
   // load data
   useEffect(() => {
     if (dataLoaded.current) {
@@ -42,8 +41,8 @@ export default function UserProfile() {
         console.log(data)
         localStorage.setItem("token", data.accessToken);
         const athleteAvatar = data?.data[0].avatar || "";
+        localStorage.setItem("avatar", athleteAvatar)
         setAvatar(athleteAvatar)
-        console.log(avatar)
       })
       .catch((e) => {
         console.log(e.message);

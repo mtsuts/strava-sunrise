@@ -1,3 +1,4 @@
+import React from "react";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -61,12 +62,11 @@ export default function SearchBar() {
 
   const handleClick = () => {
     if (inputRef.current) {
-      const value = inputRef.current.value.toLowerCase()
+      const value = inputRef.current.value.toLowerCase();
       setActivityInput(value);
       inputRef.current.focus();
     }
   };
-  
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

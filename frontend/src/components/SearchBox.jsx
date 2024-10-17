@@ -6,17 +6,6 @@ import { Grid2 } from "@mui/material";
 export default function SearchBox() {
   return (
     <Box>
-      {/* <Grid2 container spacing={2}>
-        <Grid2 item xs={4}>
-          <Box>First Box</Box>
-        </Grid2>
-        <Grid2 item xs={4}>
-          <Box>Second Box</Box>
-        </Grid2>
-        <Grid2 item xs={4}>
-          <Box>Third Box</Box>
-        </Grid2>
-      </Grid2> */}
       <Grid2
         container
         spacing={2}
